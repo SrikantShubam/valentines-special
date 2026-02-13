@@ -359,13 +359,28 @@ body {
 
 /* Memory Gallery Layout */
 .memory-gallery {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
+}
+
+/* Desktop Optimization: Keep content compact */
+@media (min-width: 768px) {
+    .container {
+        max-width: 500px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.2);
+        /* Slight dim for better readability */
+        backdrop-filter: blur(2px);
+        border-radius: 20px;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    }
 }
 
 .photo-frame {
