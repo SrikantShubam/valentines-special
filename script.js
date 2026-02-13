@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Setup Player
         const player = document.getElementById('spotifyPlayer');
-        player.style.display = 'flex';
+        player.classList.add('active');
 
         const lyricsContainer = document.querySelector('.lyrics-container');
         const lyricsContent = document.getElementById('spotifyLyrics');
@@ -268,11 +268,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Share Button Trigger
+    // Share Button Trigger
     const shareBtn = document.getElementById('shareBtn');
     if (shareBtn) {
         shareBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            showToast();
+            const shareText = `For my one and only Anu... I love you! ❤️\nhttps://github.com/SrikantShubam/valentines-special`;
+            
+            navigator.clipboard.writeText(shareText).then(() => {
+                const originalText = toast.innerText;
+                toast.innerText = "Link copied for Anu! ❤️";
+                showToast();
+                setTimeout(() => {
+                    toast.innerText = originalText;
+                }, 3500);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showToast(); // Fallback to just showing the protection message
+            });
         });
     }
 

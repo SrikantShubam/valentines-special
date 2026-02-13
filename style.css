@@ -176,12 +176,132 @@ body {
     color: white;
 }
 
+.spotify-player.active {
+    display: flex;
+}
+
 .spotify-header {
     padding: 20px 24px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     opacity: 0.6;
+}
+
+/* ... (Mobile styles remain, but overridden below for desktop) ... */
+
+/* Desktop Optimization: YouTube Music Split Layout */
+@media (min-width: 768px) {
+    .spotify-player.active {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "header lyrics"
+            "art lyrics"
+            "controls lyrics";
+        width: 900px;
+        height: 600px;
+        max-height: 90vh;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 12px;
+        /* YT Music style is slightly rounded */
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: #030303;
+        /* Deep YT Music black */
+        overflow: hidden;
+    }
+
+    /* Assign Areas */
+    .spotify-header {
+        grid-area: header;
+        padding: 20px 40px;
+    }
+
+    .album-art-container {
+        grid-area: art;
+        align-self: center;
+        justify-self: center;
+    }
+
+    .player-bottom-area {
+        grid-area: controls;
+        background: transparent;
+        backdrop-filter: none;
+        border-top: none;
+        padding: 20px 40px 40px;
+    }
+
+    .lyrics-container {
+        grid-area: lyrics;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        max-height: none;
+        /* Full height */
+        padding: 40px;
+    }
+
+    /* Adjust Elements for Desktop */
+    .album-art {
+        width: 280px;
+        /* Big art */
+        max-width: none;
+        border-radius: 8px;
+        /* Square with slight radius */
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        border: none;
+        animation: none;
+        /* remove spin for clean look */
+    }
+
+    /* Adjust Controls Layout on Desktop */
+    .track-info {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .track-name {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+    }
+
+    .artist-name {
+        font-size: 1rem;
+    }
+
+    .lie-heart {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+    }
+
+    /* Move heart to top right of controls area */
+
+    .controls {
+        justify-content: center;
+        gap: 30px;
+        margin-top: 10px;
+    }
+
+    .play-pause-btn {
+        width: 64px;
+        height: 64px;
+    }
+
+    .control-icon {
+        width: 24px;
+        height: 24px;
+        opacity: 0.7;
+    }
+
+    .control-icon:hover {
+        opacity: 1;
+        transform: scale(1.1);
+    }
 }
 
 .playlist-name {
@@ -368,20 +488,6 @@ body {
     z-index: 0;
 }
 
-/* Desktop Optimization: Keep content compact */
-@media (min-width: 768px) {
-    .container {
-        max-width: 500px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 10;
-        background: rgba(0, 0, 0, 0.2);
-        /* Slight dim for better readability */
-        backdrop-filter: blur(2px);
-        border-radius: 20px;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-    }
-}
 
 .photo-frame {
     position: absolute;
