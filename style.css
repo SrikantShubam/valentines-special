@@ -1,0 +1,477 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-romantic: #ff4d6d;
+    --primary-light: #ff758f;
+    --primary-dark: #c9184a;
+    --bg-dark: #000000;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background: radial-gradient(circle at center, #2b0b14 0%, #000000 100%);
+    font-family: var(--font-body);
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Floating Hearts Styling */
+.heart {
+    position: fixed;
+    color: var(--primary-romantic);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Landing Page Container */
+.container {
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.heartbeat {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 40px;
+    background: linear-gradient(to right, #ff4d6d, #ff8fa3, #ff4d6d);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heartbeat 1.5s ease-in-out infinite, gradientShift 3s linear infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes gradientShift {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Polaroid Photo Frame Styling (The "Cool" Theme) */
+.photo-display {
+    position: relative;
+    padding: 15px 15px 60px 15px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    transform: rotate(-3deg);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 40px;
+    max-width: 320px;
+    width: 90%;
+}
+
+.photo-display::after {
+    content: 'Our Memories ❤️';
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    font-family: 'Pacifico', cursive;
+    color: #333;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.main-photo {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border: 1px solid #eee;
+    display: block;
+}
+
+.photo-display:hover {
+    transform: rotate(0deg) scale(1.05);
+}
+
+.plea {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 10px rgba(255, 77, 109, 0.3);
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    z-index: 10;
+}
+
+.btn {
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn.yes {
+    background: linear-gradient(135deg, var(--primary-romantic), var(--primary-dark));
+    color: white;
+    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+}
+
+.btn.yes:active {
+    transform: scale(0.95);
+}
+
+.btn.no {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    border: 1px solid var(--glass-border);
+}
+
+/* --- Compact YouTube Music Player --- */
+.spotify-player {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 30%, #3d0e1b 0%, #000000 100%);
+    z-index: 2000;
+    flex-direction: column;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+.spotify-header {
+    padding: 20px 24px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0.6;
+}
+
+.playlist-name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 1. Album Art (Even Smaller) */
+.album-art-container {
+    flex-shrink: 0;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.album-art {
+    width: 35vw;
+    max-width: 140px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border: 3px solid rgba(255, 255, 255, 0.05);
+    animation: rotateArt 20s linear infinite;
+}
+
+.album-art.paused {
+    animation-play-state: paused;
+}
+
+@keyframes rotateArt {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 2. Lyrics in Middle (English Only) - More Compact */
+.lyrics-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    position: relative;
+    padding: 0 20px;
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+/* Hide scrollbar */
+.lyrics-container::-webkit-scrollbar {
+    display: none;
+}
+
+.lyrics-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lyric-line {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    text-align: center;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+.lyric-line.active {
+    color: #ffffff;
+    transform: scale(1.08);
+}
+
+/* 3. Player Bottom Area (Extremely Compact) */
+.player-bottom-area {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    padding: 15px 20px 30px;
+    border-top: 1px solid var(--glass-border);
+    border-radius: 25px 25px 0 0;
+    flex-shrink: 0;
+}
+
+.track-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.track-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.artist-name {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    margin: 2px 0 0;
+    font-weight: 500;
+}
+
+.progress-bar-container {
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.progress-current {
+    height: 100%;
+    background: var(--primary-romantic);
+    width: 0%;
+    border-radius: 2px;
+}
+
+.time-stamps {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    margin-top: 6px;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.play-pause-btn {
+    width: 48px;
+    height: 48px;
+    background: #fff;
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.play-pause-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Memory Gallery Layout */
+.memory-gallery {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.photo-frame {
+    position: absolute;
+    background: #fff;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    width: 150px;
+    transition: all 0.5s ease;
+    opacity: 0.6;
+}
+
+.photo-frame img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-frame.rotate-left {
+    transform: rotate(-15deg);
+}
+
+.photo-frame.rotate-right {
+    transform: rotate(15deg);
+}
+
+/* Individual positioning for a 'scattered' look */
+.photo-frame:nth-child(1) {
+    top: 10%;
+    left: 10%;
+}
+
+.photo-frame:nth-child(2) {
+    top: 15%;
+    right: 10%;
+}
+
+.photo-frame:nth-child(3) {
+    bottom: 20%;
+    left: 8%;
+}
+
+.photo-frame:nth-child(4) {
+    bottom: 15%;
+    right: 12%;
+}
+
+@media (max-width: 768px) {
+    .photo-frame {
+        width: 100px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .heartbeat {
+        font-size: 2.2rem;
+    }
+
+    .album-art {
+        width: 65vw;
+    }
+}
+
+/* --- Exclusive Share Protection Toast --- */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: rgba(20, 20, 20, 0.9);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 77, 109, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 3000;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.toast.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Add a subtle red glow for the warning feel */
+.toast::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    background: linear-gradient(45deg, #ff4d6d, #ff8fa3, #ff4d6d);
+    border-radius: 12px;
+    opacity: 0.5;
+    filter: blur(10px);
+}
